@@ -6,7 +6,7 @@ const exchangeRates: { [key: string]: number } = {
   EUR: 0.85, // 1 USD = 0.85 Euro
 };
 
-const CurrencyConverter2: React.FC = () => {
+const CurrencyConverter: React.FC = () => {
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [toCurrency, setToCurrency] = useState<string>("IRR");
   const [amount, setAmount] = useState<number>(0);
@@ -90,18 +90,29 @@ const CurrencyConverter2: React.FC = () => {
           </div>
         </div>
         <div className="text-center mt-8">
-          <span className="text-lg text-gray-600 font-medium">
-            1 {fromCurrency} =
-            {(
-              (1 / exchangeRates[fromCurrency]) *
-              exchangeRates[toCurrency]
-            ).toFixed(5)}
-            {toCurrency}
-          </span>
+          {fromCurrency === "IRR" ? (
+            <span className="text-lg text-gray-600 font-medium">
+              1000 {fromCurrency} =
+              {(
+                (1000 / exchangeRates[fromCurrency]) *
+                exchangeRates[toCurrency]
+              ).toFixed(5)}
+              {toCurrency}
+            </span>
+          ) : (
+            <span className="text-lg text-gray-600 font-medium">
+              1 {fromCurrency} =
+              {(
+                (1 / exchangeRates[fromCurrency]) *
+                exchangeRates[toCurrency]
+              ).toFixed(5)}
+              {toCurrency}
+            </span>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default CurrencyConverter2;
+export default CurrencyConverter;
